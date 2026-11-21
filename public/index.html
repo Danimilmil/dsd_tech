@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B2F5B">
+<title>DSD TECH INSTALAÇÕES — Recibos</title>
+<link rel="icon" href="/assets/logo.jpg">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="locked">
+<header class="top">
+  <div class="brand"><img src="/assets/logo.jpg" alt="DSD TECH"><div><b>DSD TECH INSTALAÇÕES</b><small>Sistema de recibos</small></div></div>
+  <nav>
+    <button data-view="dash" class="on">Painel</button>
+    <button data-view="editor">Novo Recibo</button>
+  </nav>
+  <button class="btn small ghost" id="lockNow" type="button">🔒 Bloquear</button>
+</header>
+
+<main>
+<section id="v-dash" class="view">
+  <div class="head"><h1>Painel</h1><button class="btn pri" id="goNew">+ Novo Recibo</button></div>
+  <div class="stats">
+    <div class="card"><span>Recibos emitidos</span><strong id="stTotal">0</strong></div>
+    <div class="card"><span>Total recebido (pagos)</span><strong id="stSum">R$ 0,00</strong></div>
+  </div>
+  <div class="card">
+    <h2>Recibos recentes</h2>
+    <div id="recent" class="recent"></div>
+  </div>
+  <div class="card">
+    <div class="head"><h2>Histórico de recibos</h2>
+      <input id="search" type="search" placeholder="Buscar cliente, CPF/CNPJ ou pedido">
+    </div>
+    <div class="scroll"><table class="tbl"><thead><tr><th>Recibo</th><th>Cliente</th><th>Data</th><th>Valor</th><th>Status</th><th>Ações</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p id="empty" class="empty" hidden>Nenhum recibo encontrado.</p>
+  </div>
+</section>
+
+<section id="v-editor" class="view" hidden>
+  <div class="head"><h1 id="edTitle">Novo recibo</h1></div>
+  <div class="split">
+    <div class="card form" id="form">
+      <h2>Dados do recebimento</h2>
+      <label>Valor do serviço<span class="affix pre"><i>R$</i><input id="valor" inputmode="decimal" placeholder="0,00" autocomplete="off"></span><small class="err" data-for="valor"></small></label>
+      <label>Desconto <span class="hint">(opcional)</span><span class="affix suf"><input id="desc" inputmode="decimal" placeholder="0" autocomplete="off"><i>%</i></span><small class="err" data-for="desc"></small></label>
+      <div class="info" id="calc"></div>
+      <div class="two">
+        <label>Data do pagamento<input id="data" type="date"><small class="err" data-for="data"></small></label>
+        <label>Status<select id="status"><option>Pago</option><option>Pendente</option><option>Parcial</option></select><small class="err" data-for="status"></small></label>
+      </div>
+      <label>Número do pedido<input id="pedido" placeholder="0003-26"><small class="err" data-for="pedido"></small></label>
+      <label>Descrição / motivo<input id="descricao" maxlength="255"><small class="err" data-for="descricao"></small></label>
+      <h2>Dados do cliente</h2>
+      <label>Nome completo ou razão social<input id="nome" maxlength="150"><small class="err" data-for="nome"></small></label>
+      <label>CPF ou CNPJ<input id="doc" inputmode="numeric" placeholder="000.000.000-00"><small class="err" data-for="doc"></small></label>
+      <h2>Empresa recebedora</h2>
+      <div class="info">DSD TECH INSTALAÇÕES<br>CNPJ: 59.470.117/0001-81</div>
+      <div class="info sub">Assinatura do responsável: fixa em todos os recibos.</div>
+    </div>
+    <div class="prev">
+      <div class="actions">
+        <button class="btn pri" id="bSave">SALVAR</button>
+        <button class="btn" id="bGen">GERAR PDF</button>
+        <button class="btn" id="bDown">BAIXAR RECIBO</button>
+        <button class="btn" id="bPrint">IMPRIMIR</button>
+        <button class="btn ghost" id="bEdit">EDITAR RECIBO</button>
+        <button class="btn ghost" id="bNew">NOVO RECIBO</button>
+      </div>
+      <div id="previewBox"><div id="sheet"></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="lock"><form id="lockForm" autocomplete="off">
+  <img src="/assets/logo.jpg" alt="DSD TECH"><h2 id="lockTitle"></h2><p id="lockMsg" class="muted"></p>
+  <input id="lockPw" type="password" placeholder="Senha" autocomplete="current-password">
+  <input id="lockPw2" type="password" placeholder="Repita a senha" autocomplete="new-password" hidden>
+  <small class="err" id="lockErr"></small>
+  <button class="btn pri" id="lockBtn">Entrar</button>
+</form></div>
+<dialog id="pdfModal"><button class="btn small" id="closeModal">Fechar</button><iframe id="pdfFrame" title="PDF"></iframe></dialog>
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

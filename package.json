@@ -1,0 +1,7 @@
+{
+  "name": "dsd-recibos",
+  "version": "2.1.0",
+  "private": true,
+  "scripts": { "start": "node dev-server.js" },
+  "devDependencies": { "express": "^4.19.2" }
+}
